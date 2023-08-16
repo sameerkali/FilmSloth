@@ -6,9 +6,14 @@ const App = () => {
   return (
     <>
     <CssBaseline>
-
-    <h1>App by sameer</h1>
-    </CssBaseline>
+        <main>
+          <Router>
+            <Switch path="/">
+              <h1>Home</h1>
+            </Switch>
+          </Router>
+        </main>
+      </CssBaseline>
 
     </>
   )
