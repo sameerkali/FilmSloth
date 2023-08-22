@@ -5,13 +5,13 @@ import { Actors, MovieInformation, Movies, NavBar, Profile } from "./index";
 import useStyles from "./styles";
 
 const App = () => {
-  const classes = useStyles();
+  const classes = useStyles({});
   return (
     <>
       <div className={classes.root}>
         <CssBaseline>
           <NavBar />
-          <mian className={classes.content}>
+          <main className={classes.content}>
             <div className={classes.toolbar} />
             <Switch>
               <Route exact path="/">
@@ -30,7 +30,7 @@ const App = () => {
                 <Profile />
               </Route>
             </Switch>
-          </mian>
+          </main>
         </CssBaseline>
       </div>
     </>
@@ -38,3 +38,5 @@ const App = () => {
 };
 
 export default App;
+
+

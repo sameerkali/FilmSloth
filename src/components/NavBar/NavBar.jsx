@@ -1,13 +1,20 @@
-import {useState} from "react";
-import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery} from "@mui/material";
+import { useState } from "react";
+import {
+  AppBar,
+  IconButton,
+  Toolbar,
+  Drawer,
+  Button,
+  Avatar,
+  useMediaQuery
+} from "@mui/material";
 import { Menu, AccountCircle } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
 import WbIncandescentIcon from "@mui/icons-material/WbIncandescent";
 import WbIncandescentOutlinedIcon from "@mui/icons-material/WbIncandescentOutlined";
-import {Sidebar} from '../index'
-import { useTheme } from '@mui/material/styles';
-
+import { Sidebar } from "../index";
+import { useTheme } from "@mui/material/styles";
 
 const NavBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -29,7 +36,7 @@ const NavBar = () => {
               color="inherit"
               edge="start"
               style={{ outline: "none" }}
-              onClick={() => setMobileOpen( (prevMobileOpen) => !prevMobileOpen)}
+              onClick={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}
               className={classes.menuButton}
             >
               <Menu />
@@ -75,17 +82,21 @@ const NavBar = () => {
         <nav className={classes.Drawer}>
           {isMobile ? (
             <Drawer
-              variant="remporary"
+              variant="temporary"
               anchor="right"
               open={mobileOpen}
-              onClose={() => setMobileOpen( (prevMobileOpen) => !prevMobileOpen)}
+              onClose={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}
               classes={{ paper: classes.drawerPaper }}
               ModalProps={{ keepMounted: true }}
             >
               <Sidebar setMobileOpen={setMobileOpen} />
             </Drawer>
           ) : (
-            <Drawer classes={{ paper: classes.drawerPaper }} variant="permanent" open>
+            <Drawer
+              classes={{ paper: classes.drawerPaper }}
+              variant="permanent"
+              open
+            >
               <Sidebar setMobileOpen={setMobileOpen} />
             </Drawer>
           )}
@@ -96,4 +107,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
