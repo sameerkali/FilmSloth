@@ -5,10 +5,13 @@ import {
   ListItem,
   ListItemText,
   ListSubheader,
-  ListItemIcon
+  ListItemIcon,
+  Box,
+  CircularProgress 
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
+import { useGetGenresQuery } from "../../services/TMDB";
 import useStyles from "./styles";
 
 const categories = [
@@ -29,6 +32,8 @@ const lightLogo =
 const Sidebar = ({ setMobileOpen }) => {
   const theme = useTheme();
   const classes = useStyles();
+  const { data, isFetching } = useGetGenresQuery();
+  // /* For Debugging */ console.log(data)
 
   return (
     <>
@@ -61,8 +66,12 @@ const Sidebar = ({ setMobileOpen }) => {
       <Divider />
       <List>
         <ListSubheader>Genres</ListSubheader>
-        {demoCategories.map(({ label, value }) => (
-          <Link key={value} className={classes.links} to="/">
+        {isFetching ? (
+          <Box display="flex" justifyContent="center">
+        <CircularProgress />
+      </Box>
+          ) : data.genres.map(({ name, id }) => (
+          <Link title={name} key={id} className={classes.links} to="/">
             <ListItem onClick={() => {}} button>
               <ListItemIcon>
                 {/* <img
@@ -72,7 +81,7 @@ const Sidebar = ({ setMobileOpen }) => {
                   alt={label} 
                 /> */}
               </ListItemIcon>
-              <ListItemText primary={label} />
+              <ListItemText primary={name} />
             </ListItem>
           </Link>
         ))}

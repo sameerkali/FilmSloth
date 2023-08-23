@@ -6,8 +6,6 @@ import { Movie } from "../index.js";
 function MovieList({ movies }) {
   const some = JSON.stringify(movies);
   const classes = useStyles();
-  // console.log(import.meta.env.VITE_SOME_KEY)
-  // console.log("movies List -->" + some);
   return (
     <Grid container className={classes.moviesContainer}>
       {JSON.parse(some).map((movie, i) => {
