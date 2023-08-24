@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Typography,
   Grid,
@@ -13,10 +13,17 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetMoviesQuery } from "../../services/TMDB";
 import { MovieList } from "../index";
+import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
 const Movies = () => {
+  const [page, setPage] = useState(1)
+  const { genreIdOrCategoryName } = useSelector(
+    (state) => state.currentGenreOrCategory
+  );
+  // console.log(genreIdOrCategoryName)
+
   // Fetch movie data using the useGetMoviesQuery hook
-  const { data, error, isFetching } = useGetMoviesQuery();
+  const { data, error, isFetching } = useGetMoviesQuery({genreIdOrCategoryName, page});
 
   // Display a loading spinner while fetching data
   if (isFetching) {
