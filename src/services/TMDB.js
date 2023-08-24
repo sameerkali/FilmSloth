@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const page = 10;
 
 console.log(
   "this app is create by Sameer Faridi | GitHub @sameerkali 🚀🍌6️⃣9️⃣"

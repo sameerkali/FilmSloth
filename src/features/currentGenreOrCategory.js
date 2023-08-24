@@ -35,7 +35,7 @@ const genreOrCategorySlice = createSlice({
   initialState,
   reducers: {
     selectGenreOrCategory: (state, action) => {
-      // console.log(action.payload);
+    //  /*Dubugging*/  console.log(action.payload);
       state.genreIdOrCategoryName = action.payload;
       state.searchQuery = "";
     },

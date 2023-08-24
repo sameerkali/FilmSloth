@@ -3,6 +3,8 @@ export default makeStyles(()=>({
     root: {
         display:'flex',
         height:'100%',
+        maxWidth: "100%",
+        overflowX: "hidden",
     },
     toolbar: {
         height:'70px'

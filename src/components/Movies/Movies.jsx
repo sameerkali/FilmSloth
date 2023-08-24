@@ -17,13 +17,13 @@ import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
 const Movies = () => {
   const [page, setPage] = useState(1)
-  const { genreIdOrCategoryName } = useSelector(
+  const { genreIdOrCategoryName, searchQuery } = useSelector(
     (state) => state.currentGenreOrCategory
   );
   // console.log(genreIdOrCategoryName)
 
   // Fetch movie data using the useGetMoviesQuery hook
-  const { data, error, isFetching } = useGetMoviesQuery({genreIdOrCategoryName, page});
+  const { data, error, isFetching } = useGetMoviesQuery({genreIdOrCategoryName, page, searchQuery});
 
   // Display a loading spinner while fetching data
   if (isFetching) {
