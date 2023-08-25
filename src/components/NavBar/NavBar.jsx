@@ -16,7 +16,7 @@ import WbIncandescentOutlinedIcon from "@mui/icons-material/WbIncandescentOutlin
 import { Search, Sidebar } from "../index";
 import { useTheme } from "@mui/material/styles";
 import { fetchToken, createSessionId, moviesApi } from "../../utils/index";
-import { useDispatch, useSelector } from "react-redux"; 
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../features/auth";
 
 const NavBar = () => {
@@ -93,7 +93,7 @@ const NavBar = () => {
                 className={classes.linkButton}
                 onClick={() => {}}
               >
-                {!isMobile && <> My Movies &nbsp; </>}  
+                {!isMobile && <> My Movies &nbsp; </>}
                 <Avatar
                   style={{ width: 30, height: 30 }}
                   alt="Profile"
@@ -109,7 +109,7 @@ const NavBar = () => {
       </AppBar>
       {/* ------------------------------------------SideBar--------------------------------------------- */}
       <div>
-        <nav className={classes.Drawer}>
+        <nav className={classes.drawer}>
           {isMobile ? (
             <Drawer
               variant="temporary"
