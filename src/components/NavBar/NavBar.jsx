@@ -29,7 +29,7 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
-  console.log(user);
+  // /*Debuging*/console.log(user);
 
   useEffect(() => {
     const logInUser = async () => {
