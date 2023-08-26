@@ -26,7 +26,6 @@ export default makeStyles((theme) => ({
     },
     "&:hover": {
         width: '80.2%',
-        
       }
   },
   genresContainer: {
