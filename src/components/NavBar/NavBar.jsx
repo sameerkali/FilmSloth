@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState, useContext } from "react";
 import {
   AppBar,
   IconButton,
@@ -18,6 +18,7 @@ import { useTheme } from "@mui/material/styles";
 import { fetchToken, createSessionId, moviesApi } from "../../utils/index";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../features/auth";
+import { ColorModeContext } from "../../utils/ToggleColorMode";
 
 const NavBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -28,6 +29,7 @@ const NavBar = () => {
   const sessionIdFromLocalStorage = localStorage.getItem("session_id");
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const colorMode = useContext(ColorModeContext);
 
   // /*Debuging*/console.log(user);
 
@@ -57,7 +59,6 @@ const NavBar = () => {
       {/*------------------------------------------NavBar--------------------------------------------- */}
       <AppBar
         position="fixed"
-        style={{ background: "linear-gradient(to right, #093028, #237a57)" }}
       >
         <Toolbar className={classes.toolbar}>
           {isMobile && (
@@ -71,7 +72,7 @@ const NavBar = () => {
               <Menu />
             </IconButton>
           )}
-          <IconButton color="inherit" sx={{ ml: 1 }} onClick={() => {}}>
+          <IconButton color="inherit" sx={{ ml: 1 }} onClick={colorMode.toggleColorMode}>
             {theme.palette.mode === "dark" ? (
               <WbIncandescentIcon />
             ) : (

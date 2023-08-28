@@ -19,7 +19,6 @@ export default makeStyles((theme) => ({
     alignItems: "center",
     fontWeight: "bolder",
     textDecoration: "none",
-    backgroundColor: '#f3fcf6',
     [theme.breakpoints.up("xs")]: {
       display: "flex",
       flexDirection: "column"

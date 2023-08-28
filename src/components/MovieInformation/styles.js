@@ -12,7 +12,7 @@ export default makeStyles((theme) => ({
   },
   poster: {
     borderRadius: '5px',
-    boxShadow: '0.2em .4em .7em rgb(64, 64, 70)',
+    // boxShadow: '0.2em .4em .7em rgb(64, 64, 70)',
     width: '80%',
     [theme.breakpoints.down('md')]: {
       margin: '0 auto !imporatant',
@@ -35,7 +35,7 @@ export default makeStyles((theme) => ({
     flexWrap: 'wrap',
   },
   genreImage: {
-    filter: theme.palette.mode === 'dark' && 'invert(1)',
+    // filter: theme.palette.mode === 'dark' && 'invert(1)',
     marginRight: '10px',
   },
   links: {
@@ -75,5 +75,9 @@ export default makeStyles((theme) => ({
       height: '90%',
     },
   },
+  // makeImageCenter: {
+  //   display: 'flex',
+  //   marginBottom: '30px'
+  // }
 }));
     

@@ -7,7 +7,7 @@ import {
   Grid,
   Box,
   CircularProgress,
-  Rating,
+  Rating
 } from "@mui/material";
 import {
   Movie as MovieIcon,
@@ -17,7 +17,7 @@ import {
   Favorite,
   FavoriteBorderOutlined,
   Remove,
-  ArrowBack,
+  ArrowBack
 } from "@mui/icons-material";
 import { BottomNavigation } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
@@ -25,20 +25,23 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 import useStyles from "./styles";
-import { MovieList } from "../index";
+import { MovieList, Pagination } from "../index";
 import {
   useGetMovieQuery,
   useGetRecommendationsQuery,
   useGetListQuery,
+  useGetMoviesByActorIdQuery
 } from "../../services/TMDB";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 import genreIcons from "../../assets/genres";
 // ------------------------------------------------------------------------------------------
 function MovieInfo() {
   const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
   const { user } = useSelector((state) => state.user);
   const { id } = useParams();
   const classes = useStyles();
+  const { data: movies } = useGetMoviesByActorIdQuery({ id, page });
 
   const { data, isFetching, error } = useGetMovieQuery(id);
   const [open, setOpen] = useState(false);
@@ -46,7 +49,7 @@ function MovieInfo() {
   const [isMovieWatchlisted, setIsMovieWatchlisted] = useState(false);
   const { data: recommendations } = useGetRecommendationsQuery({
     list: "/recommendations",
-    movie_id: id,
+    movie_id: id
   });
   // console.log(recommendations);
   const tmdbApiKey = import.meta.env.VITE_TMDB_KEY;
@@ -61,7 +64,7 @@ function MovieInfo() {
       {
         media_type: "movie",
         media_id: id,
-        watchlist: !isMovieWatchlisted,
+        watchlist: !isMovieWatchlisted
       }
     );
 
@@ -78,7 +81,7 @@ function MovieInfo() {
       {
         media_type: "movie",
         media_id: id,
-        favorite: !isMovieFavorited,
+        favorite: !isMovieFavorited
       }
     );
     setIsMovieFavorited((prev) => !prev);
@@ -102,7 +105,17 @@ function MovieInfo() {
   return (
     <>
       <Grid container className={classes.containerSpaceAround}>
-        <Grid item sm={12} lg={4}>
+        <Grid
+          className={classes.makeImageCenter}
+          item
+          sm={12}
+          lg={4}
+          style={{
+            display: "block",
+            marginBottom: "30px",
+            textAlign: "center"
+          }}
+        >
           <img
             className={classes.poster}
             src={`https://image.tmdb.org/t/p/w500/${data?.poster_path}`}
@@ -134,8 +147,7 @@ function MovieInfo() {
               </Typography>
             </Box>
             <Typography variant="16" align="center" gutterBottom>
-              {data?.runtime}min{" "}
-              {data?.spoken_languages.length > 0
+              {data?.runtime}min {data?.spoken_languages.length > 0
                 ? `/ ${data?.spoken_languages[0].name}`
                 : ""}
             </Typography>
@@ -161,8 +173,7 @@ function MovieInfo() {
             ))}
           </Grid>
           <Typography variant="h5" gutterBottom style={{ marginTop: "20px" }}>
-            {" "}
-            Overview{" "}
+            Overview
           </Typography>
           <Typography style={{ marginTop: "0rem" }}>
             {data?.overview}
@@ -280,37 +291,45 @@ function MovieInfo() {
           </Grid>
         </Grid>
         <Box marginTop="5rem" width="100%">
-        <Typography variant="h3" gutterBottom align="center">
-          You might also like
-        </Typography>
-        {recommendations
-          ? <MovieList movies={recommendations} numberOfMovies={12} />
-          : <Box>Sorry, nothing was found.</Box>}
-      </Box>
-      <Modal
-        closeAfterTransition
-        className={classes.modal}
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        {data?.videos?.results?.length > 0 && (
-          <iframe
-            autoPlay
-            className={classes.video}
-            frameBorder="0"
-            title="Trailer"
-            src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
-            allow="autoplay"
-          />
-        )}
-      </Modal>
-        
+          <Typography variant="h3" gutterBottom align="center">
+            You might also like
+          </Typography>
+          {recommendations ? (
+            <MovieList movies={recommendations} numberOfMovies={12} />
+          ) : (
+            <Box>Sorry, nothing was found.</Box>
+          )}
+        </Box>
+        <Modal
+          closeAfterTransition
+          className={classes.modal}
+          open={open}
+          onClose={() => setOpen(false)}
+        >
+          {data?.videos?.results?.length > 0 && (
+            <iframe
+              autoPlay
+              className={classes.video}
+              frameBorder="0"
+              title="Trailer"
+              src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+              allow="autoplay"
+            />
+          )}
+        </Modal>
+
+        <Pagination
+          currentPage={page}
+          setPage={setPage}
+          totalPages={movies?.total_pages}
+        />
+
         <Box marginTop="5rem" width="100%">
           <h4
             style={{
               textAlign: "center",
               color: "#ccc",
-              marginBottom: "-1.5rem",
+              marginBottom: "-1.5rem"
             }}
           >
             This app is created by @sameerkali
