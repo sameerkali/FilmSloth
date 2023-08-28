@@ -13,18 +13,26 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetMoviesQuery } from "../../services/TMDB";
 import { MovieList } from "../index";
-import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
+import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 
 const Movies = () => {
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(1);
   const { genreIdOrCategoryName, searchQuery } = useSelector(
     (state) => state.currentGenreOrCategory
   );
-  // console.log(genreIdOrCategoryName)
+  const lg = useMediaQuery((theme) => theme.breakpoints.only('lg'));
+  const numberOfMovies = lg ? 17 : 19;
+  // console.log(genreIdOrCategoryName);
 
   // Fetch movie data using the useGetMoviesQuery hook
-  const { data, error, isFetching } = useGetMoviesQuery({genreIdOrCategoryName, page, searchQuery});
+  const { data, error, isFetching } = useGetMoviesQuery({
+    genreIdOrCategoryName,
+    page,
+    searchQuery
+  });
 
+  // console.log(data);
+  // console.log(data);
   // Display a loading spinner while fetching data
   if (isFetching) {
     return (
@@ -51,11 +59,25 @@ const Movies = () => {
       </Box>
     );
   }
-
   // Render the MovieList component with fetched movie data
   return (
+
     <div>
-      <MovieList movies={data.results} />
+      {
+        <MovieList movies={data} numberOfMovies={numberOfMovies} excludeFirst />
+      }
+
+      <Box marginTop="5rem" width="100%">
+          <h4
+            style={{
+              textAlign: "center",
+              color: "#ccc",
+              marginBottom: "-1.5rem",
+            }}
+          >
+            This app is created by @sameerkali
+          </h4>
+        </Box>
     </div>
   );
 };

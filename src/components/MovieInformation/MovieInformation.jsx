@@ -7,7 +7,7 @@ import {
   Grid,
   Box,
   CircularProgress,
-  Rating
+  Rating,
 } from "@mui/material";
 import {
   Movie as MovieIcon,
@@ -17,7 +17,7 @@ import {
   Favorite,
   FavoriteBorderOutlined,
   Remove,
-  ArrowBack
+  ArrowBack,
 } from "@mui/icons-material";
 import { BottomNavigation } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
@@ -29,7 +29,7 @@ import { MovieList } from "../index";
 import {
   useGetMovieQuery,
   useGetRecommendationsQuery,
-  useGetListQuery
+  useGetListQuery,
 } from "../../services/TMDB";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 import genreIcons from "../../assets/genres";
@@ -46,9 +46,9 @@ function MovieInfo() {
   const [isMovieWatchlisted, setIsMovieWatchlisted] = useState(false);
   const { data: recommendations } = useGetRecommendationsQuery({
     list: "/recommendations",
-    movie_id: id
+    movie_id: id,
   });
-  console.log(recommendations);
+  // console.log(recommendations);
   const tmdbApiKey = import.meta.env.VITE_TMDB_KEY;
 
   const addToWatchList = async () => {
@@ -61,7 +61,7 @@ function MovieInfo() {
       {
         media_type: "movie",
         media_id: id,
-        watchlist: !isMovieWatchlisted
+        watchlist: !isMovieWatchlisted,
       }
     );
 
@@ -78,7 +78,7 @@ function MovieInfo() {
       {
         media_type: "movie",
         media_id: id,
-        favorite: !isMovieFavorited
+        favorite: !isMovieFavorited,
       }
     );
     setIsMovieFavorited((prev) => !prev);
@@ -232,7 +232,8 @@ function MovieInfo() {
                   </Button>
                   <Button
                     onClick={() => setOpen(true)}
-                    href={`https://www.imdb.com/title/${data?.imdb_id}/videogallery`}
+                    target="_blank"
+                    // href={`https://www.imdb.com/title/${data?.imdb_id}/videogallery`}
                     endIcon={<Theaters />}
                   >
                     Trailer
@@ -279,7 +280,41 @@ function MovieInfo() {
           </Grid>
         </Grid>
         <Box marginTop="5rem" width="100%">
-        <h4 style={{textAlign: 'center', color: '#ccc', marginBottom: '-1.5rem'}}>This app is created by @sameerkali</h4>
+        <Typography variant="h3" gutterBottom align="center">
+          You might also like
+        </Typography>
+        {recommendations
+          ? <MovieList movies={recommendations} numberOfMovies={12} />
+          : <Box>Sorry, nothing was found.</Box>}
+      </Box>
+      <Modal
+        closeAfterTransition
+        className={classes.modal}
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        {data?.videos?.results?.length > 0 && (
+          <iframe
+            autoPlay
+            className={classes.video}
+            frameBorder="0"
+            title="Trailer"
+            src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+            allow="autoplay"
+          />
+        )}
+      </Modal>
+        
+        <Box marginTop="5rem" width="100%">
+          <h4
+            style={{
+              textAlign: "center",
+              color: "#ccc",
+              marginBottom: "-1.5rem",
+            }}
+          >
+            This app is created by @sameerkali
+          </h4>
         </Box>
       </Grid>
     </>
