@@ -3,6 +3,10 @@ import { Route, Switch } from "react-router-dom";
 import { Actors, MovieInformation, Movies, NavBar, Profile } from "./index";
 import useStyles from "./styles";
 
+
+
+
+
 const App = () => {
   const classes = useStyles();
   return (

@@ -15,6 +15,7 @@ import useStyles from "./styles";
 import genreIcons from '../../assets/genres';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
+import logo from '../../assets/logoreal.png'
 
 
 
@@ -24,8 +25,8 @@ const categories = [
   { label: "Upcoming", value: "upcoming" }
 ];
 
-const lightLogo =
-  "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg";
+const lightLogo = logo;
+  // "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg";
 
 const Sidebar = ({ setMobileOpen }) => {
   const theme = useTheme();
