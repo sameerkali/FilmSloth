@@ -54,6 +54,31 @@ function MovieInfo() {
   // console.log(recommendations);
   const tmdbApiKey = import.meta.env.VITE_TMDB_KEY;
 
+  // watchlist and favorite starts
+  const { data: favoriteMovies } = useGetListQuery({
+    listName: "favorite/movies",
+    accountId: user.id,
+    sessionId: localStorage.getItem("session_id"),
+    page: 1
+  });
+  const { data: watchlistMovies } = useGetListQuery({
+    listName: "watchlist/movies",
+    accountId: user.id,
+    sessionId: localStorage.getItem("session_id"),
+    page: 1
+  });
+
+  useEffect(() => {
+    setIsMovieFavorited(
+      !!favoriteMovies?.results?.find((movie) => movie?.id === data?.id)
+    );
+  }, [favoriteMovies, data]);
+  useEffect(() => {
+    setIsMovieWatchlisted(
+      !!watchlistMovies?.results?.find((movie) => movie?.id === data?.id)
+    );
+  }, [watchlistMovies, data]);
+
   const addToWatchList = async () => {
     await axios.post(
       `https://api.themoviedb.org/3/account/${
@@ -86,6 +111,7 @@ function MovieInfo() {
     );
     setIsMovieFavorited((prev) => !prev);
   };
+  // watchlist and favorite ends
 
   if (isFetching) {
     return (
@@ -147,7 +173,8 @@ function MovieInfo() {
               </Typography>
             </Box>
             <Typography variant="16" align="center" gutterBottom>
-              {data?.runtime}min {data?.spoken_languages.length > 0
+              {data?.runtime}min{" "}
+              {data?.spoken_languages.length > 0
                 ? `/ ${data?.spoken_languages[0].name}`
                 : ""}
             </Typography>

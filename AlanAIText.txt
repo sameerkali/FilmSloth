@@ -1,0 +1,188 @@
+//it's a small gift for you
+
+const genres = [
+    { "id": 28, "name": "Action" },
+    { "id": 12, "name": "Adventure" },
+    { "id": 16, "name": "Animation" },
+    { "id": 35, "name": "Comedy" },
+    { "id": 80, "name": "Crime" },
+    { "id": 99, "name": "Documentary" },
+    { "id": 18, "name": "Drama" },
+    { "id": 10751, "name": "Family" },
+    { "id": 14, "name": "Fantasy" },
+    { "id": 36, "name": "History" },
+    { "id": 27, "name": "Horror" },
+    { "id": 10402, "name": "Music" },
+    { "id": 9648, "name": "Mystery" },
+    { "id": 10749, "name": "Romance" },
+    { "id": 878, "name": "Science Fiction" },
+    { "id": 10770, "name": "TV Movie" },
+    { "id": 53, "name": "Thriller" },
+    { "id": 10752, "name": "War" },
+    { "id": 37, "name": "Western" }
+  ];
+  const stringifiedGenres = genres.map(({ name }) => name.toLowerCase()).join("");
+
+
+
+
+  intent(["recommend me a fantastic movie"], p => {
+    p.play(`ekminut bhaaiii koi sexy sii movie dikhhaaa detaa huu `)
+  })
+intent(["how are you doing"], p => {
+    p.play(`eknumber bhaaiii tuu sunaa mai toh aajkal movies recommend karr rahaa huu `)
+  })
+intent([
+    "What does this app do?",
+    "What can I do here?",
+    "What is this app about?"
+  ], p => {
+    p.play({ command: 'openInfo' });
+    p.play(`This is Film Sloth, an app where you can find the movies you love. Try saying 'Go to Comedy','log in', 'log out', 'suprise me ', 'search for shaktimaan', 'make it dark', 'how are you doing', 'recommend me a fantastic movie'`)
+  });
+
+
+
+  intent([
+    "this app is trash",
+    "you sucks",
+    "you are useless"
+  ], p => {
+    p.play(`Billooo Baggeeei Billiyaaann Daa Kii Karengi
+Bagggeeei Bagggeeei Billiyaann Daa Kii Karengi
+Billioooo Bagggee Billiyaann Daa Kii Karenggii
+Niii Meraaa Maardaaa Ubaaaleee Khnoon Anggg Angggg Tonn
+Hoooo Hooooo Hoooo Hoooo..
+
+Kaleeee Jeee Libaaaasss Diii Shaukeenan Kudiii
+Duur Duur Javeee Mereee Kaleee Rang Toooh
+Kaleee Jeee Libaas Di Shaukeenan Kudiiii
+Duur Duur Jave Mere Kale Rangg Tooooooooohhhhhh
+`)
+  });
+
+
+
+    intent(["Make it dark", "dark mode", "turn the lights off", "make it dark", "lights off","call batman"], (p) => {
+    p.play({ command: 'changeMode', mode: 'dark' });
+    p.play("Batman likes this, I hope you will as well.");
+  });
+ intent(["Make it light", "light mode", "turn the lights on", "make it bright", "lights on"], (p) => {
+    p.play({ command: 'changeMode', mode: 'light' });
+    p.play("Ahhh, My eyes hurts. barbie likes this, I hope you will as well.");
+  });
+ intent(["Log in", "Login"], (p) => {
+    p.play("Logging you in.");
+    p.play({ command: "login" });
+  });
+  
+  intent(["Log out", "Logout"], (p) => {
+    p.play("Logging you out.");
+    p.play({ command: "logout" });
+  });
+
+
+
+  intent(
+  `go to $(GENRE ${stringifiedGenres} | top rated | popular | upcoming)`,
+  (p) => {
+    p.play(`Going to ${p.GENRE.value} category.`);
+    p.play({ command: "chooseGenre", genreOrCategory: p.GENRE.value, genres});
+  }
+);
+
+
+intent(`Search for $(QUERY* (.*))`, (p) => {
+    p.play(`Searching for ${p.QUERY.value}`);
+    p.play({command: 'search', query: p.QUERY.value});
+})
+
+
+
+intent(["It's Halloween", "I want to get scared"], (p) => {
+  p.play({ command: "chooseGenre", genre: "Horror"});
+  p.play(
+    "When Witches Go Riding and Black Cats Are Seen: The Moon Laughs and Whispers - It's Halloween"
+  );
+});
+
+intent("Surprise me", (p) => {
+  p.play(`Teill lagaa ke leto mai aah rahaa hu `);
+});
+
+intent(["Give me something funny", "I want to laugh"], (p) => {
+  p.play({ command: "chooseGenre", genre: "Comedy", genres: p });
+  p.play("Comedy it is. Enjoy!");
+});
+intent("Make it dark", (p) => {
+  p.play({ command: "changeMode", mode: "dark" });
+  p.play("Batman likes this, I hope you will as well.");
+});
+
+intent("Make it light", (p) => {
+  p.play({ command: "changeMode", mode: "light" });
+  p.play("Ahh, my eyes hurt. Looks good though! I hope you like it.");
+});
+
+intent(["Log in", "Login"], (p) => {
+  p.play("Logging you in.");
+  p.play({ command: "login" });
+});
+
+intent(["Log out", "Logout"], (p) => {
+  p.play("Logging you out.");
+  p.play({ command: "logout" });
+});
+intent("Show me my watchlist", (p) => {
+  p.play("Sure, here's your watchlist.");
+  p.play({ command: "showWatchlist" });
+});
+
+intent("Recommend something for me", (p) => {
+  p.play(`hmm sounds intreasting, here are some of my personal favourate movies  'bhagam bhag', 'halchal', 'deewane hue pagal' , 'chup chup ke', 'sholay','shaktiman', 'Nayak', '3 Idiots', 'dangal', 'bhag milkha bhag', etc..`);
+  p.play({ command: "recommendMovie" });
+});
+
+
+
+
+
+intent("Tell me a movie fact", (p) => {
+      p.play(`Mukesh Khanna has an important role in this film, ironically the latter played superhero Shaktimaan in the longest running show Shaktimaan (1997) later on.`);
+  p.play({ command: "getMovieFact" });
+});
+
+intent("Play a random trailer", (p) => {
+  p.play("Kyun gareeeb ka mazaak udaa rahaa hai bahhaaiii");
+  p.play({ command: "playRandomTrailer" });
+});
+
+intent("Change the language to Spanish", (p) => {
+  p.play("¡Claro! Cambiando el idioma a español.");
+  p.play({ command: "changeLanguage", language: "Spanish" });
+});
+
+intent("Turn on subtitles", (p) => {
+  p.play("Kyun gareeeb ka mazaak udaa rahaa hai bahhaaiii");
+  p.play({ command: "toggleSubtitles", on: true });
+});
+
+intent("What's new in the app?", (p) => {
+  p.play("Kyun gareeeb ka mazaak udaa rahaa hai bahhaaiii");
+  p.play({ command: "showNewFeatures" });
+});
+
+intent("Pause the movie", (p) => {
+  p.play("Kyun gareeeb ka mazaak udaa rahaa hai bahhaaiii");
+  p.play({ command: "pauseMovie" });
+});
+
+intent("Resume playback", (p) => {
+  p.play("Kyun gareeeb ka mazaak udaa rahaa hai bahhaaiii");
+  p.play({ command: "resumePlayback" });
+});
+
+intent("kyaa haal hai bhai", (p) => {
+  p.play("ek number bhai tu suna mai toh aajkal movies recommend kr rahaa hu ");
+  p.play({ command: "skipNextScene" });
+});

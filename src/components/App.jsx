@@ -1,14 +1,14 @@
 import { CssBaseline } from "@mui/material";
+import { useRef } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Actors, MovieInformation, Movies, NavBar, Profile } from "./index";
 import useStyles from "./styles";
-
-
-
-
+import useAlan from "../Alan";
 
 const App = () => {
   const classes = useStyles();
+  const alanBtnContainer = useRef();
+  useAlan();
   return (
     <>
       <div className={classes.root}>
@@ -34,6 +34,7 @@ const App = () => {
               </Route>
             </Switch>
           </main>
+          <div href={alanBtnContainer} />
         </CssBaseline>
       </div>
     </>
@@ -41,5 +42,3 @@ const App = () => {
 };
 
 export default App;
-
-
