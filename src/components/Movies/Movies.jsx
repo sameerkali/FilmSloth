@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetMoviesQuery } from "../../services/TMDB";
-import { MovieList, Pagination} from "../index";
+import { FeaturedMovie, MovieList, Pagination} from "../index";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 
 const Movies = () => {
@@ -63,6 +63,7 @@ const Movies = () => {
   return (
 
     <div>
+    <FeaturedMovie movie={data.results[3]} />
       {
         <MovieList movies={data} numberOfMovies={numberOfMovies} excludeFirst />
       }
