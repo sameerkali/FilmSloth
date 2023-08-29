@@ -1,18 +1,19 @@
-# [Film Sloth](https://filmsloth.netlify.app/)
-# For Big Screens. Results be like -
-## catogory_searching
-![Alt text](src/assets/images/Film_Sloth(1).png)
-## light_theam
-![Alt text](src/assets/git_reference/big_screen/light_theam.png)
+`August 16, 2023 to August 29, 2023`
+# [Film Sloth](https://filmsloth.netlify.app/) <- Click to watch live preview
+
 ## main_look
-![Alt text](src/assets/git_reference/big_screen/main_look.png)
+![Alt text](src/assets/images/Film_Sloth3.png)
+## light_theam
+![Alt text](src/assets/images/Film_Sloth2.png)
 ## platform_searching
-![Alt text](src/assets/git_reference/big_screen/platform_searching.png)
-## skeliton_loading
-![Alt text](src/assets/git_reference/big_screen/skeliton_loading.png)
+![Alt text](src/assets/images/Film_Sloth4.png)
+## Actor Page
+![Alt text](src/assets/images/Film_Sloth7.png)
+## Favorite & Bookmarked movies Page
+![Alt text](src/assets/images/Film_Sloth8.png)
 
 # It is Proper responsive
-<img src="src/assets/git_reference/small_screen/responsive_image.png" alt="image" width="auto" height="auto">
+![Alt text](src/assets/images/mobile/responsiveFilmSloth.png)
 
 🕵️‍♂️ FilmSloth: Unlock cinematic secrets! Discover hidden 🎥 gems effortlessly and delve into the world of entertainment with our intuitive app.
 
