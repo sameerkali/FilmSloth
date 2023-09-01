@@ -1,19 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Typography,
-  Grid,
-  Grow,
-  Tooltip,
-  Rating,
   Box,
   CircularProgress,
   useMediaQuery
 } from "@mui/material";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetMoviesQuery } from "../../services/TMDB";
 import { FeaturedMovie, MovieList, Pagination} from "../index";
-import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 
 const Movies = () => {
   const [page, setPage] = useState(1);
@@ -63,7 +57,7 @@ const Movies = () => {
   return (
 
     <div>
-    <FeaturedMovie movie={data.results[3]} />
+    <FeaturedMovie movie={data.results[2]} />
       {
         <MovieList movies={data} numberOfMovies={numberOfMovies} excludeFirst />
       }
