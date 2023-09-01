@@ -1,5 +1,6 @@
 `August 16, 2023 to August 29, 2023`
 # [Film Sloth](https://filmsloth.netlify.app/) <- Click to watch live preview
+## [Scrib Steps](https://scribehow.com/shared/How_to_Browse_and_Manage_Movies_on_a_Website__RcYmQF1OQdeVea0_FrYQKw)
 
 ## main_look
 ![Alt text](src/assets/images/Film_Sloth3.png)
